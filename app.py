@@ -48,20 +48,25 @@ df["RiskSegment"] = pd.cut(
 )
 
 
-st.title("📊 Customer Churn Prediction Dashboard")
+st.title("📊 Customer Churn Prediction & Retention Intelligence ")
 
 st.markdown("""
-Machine Learning based Customer Churn Prediction System
-built using Online Retail II dataset.
+Production-ready machine learning system for
+customer churn prediction, risk segmentation,
+and retention intelligence.
 """)
 
 st.sidebar.title("📊 CCP System")
 
-st.sidebar.markdown("""
-Customer Churn Prediction
-and Retention Intelligence
+st.sidebar.success("Production Version")
+
+st.sidebar.info("""
+Customer Churn Prediction &
+Retention Intelligence System
 """)
 
+
+st.subheader("Executive Summary")
 # KPIs
 
 total_customers = len(df)
@@ -94,6 +99,8 @@ with col3:
         f"{active_customers:,}"
     )
 
+st.divider()
+
 
 col1, col2, col3 = st.columns(3)
 
@@ -117,7 +124,69 @@ with col3:
 
 st.divider()
 
-st.subheader("Project Overview")
+risk_counts = pd.DataFrame({
+    "RiskSegment": [
+        "High Risk",
+        "Medium Risk",
+        "Low Risk"
+    ],
+    "Count": [
+        450,
+        373,
+        164
+    ]
+})
+
+revenue_at_risk = (
+    df[df["churn"] == 1]["Monetary"]
+    .sum()
+)
+
+largest_segment = (
+    risk_counts
+    .sort_values(
+        "Count",
+        ascending=False
+    )
+    .iloc[0]["RiskSegment"]
+)
+
+customers_at_risk = (
+    risk_counts["Count"]
+    .sum()
+)
+
+#executive intelligence
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric(
+        "Revenue At Risk",
+        f"${revenue_at_risk:,.0f}"
+    )
+
+with col2:
+    st.metric(
+        "Largest Risk Segment",
+        largest_segment
+    )
+
+with col3:
+    st.metric(
+        "Customers At Risk",
+        f"{customers_at_risk:,}"
+    )
+
+with col4:
+    st.metric(
+        "Recommended Action",
+        "Retention"
+    )
+
+st.divider()
+
+st.subheader("Business Overview")
 
 col1, col2 = st.columns(2)
 
@@ -143,7 +212,7 @@ with col2:
     and customer-level features.
     """)
 
-st.subheader("Model Performance")
+st.subheader("Production Model Performance")
 
 model_results = pd.DataFrame({
     "Model": [
@@ -187,7 +256,7 @@ st.divider()
 # st.subheader("Dataset Preview")
 # st.dataframe(df.head())
 
-st.subheader("Customer Churn Analysis")
+st.subheader("Customer Portfolio Analysis")
 
 col1, col2 = st.columns(2)
 
@@ -319,8 +388,18 @@ st.markdown("""
 
 st.markdown("---")
 
-st.caption(
-    "Customer Churn Prediction Project | Built with Python, Scikit-Learn and Streamlit"
-)
+st.markdown("""
+### Customer Churn Prediction & Retention Intelligence System
+
+Built Using:
+
+- Python
+- Scikit-Learn
+- Streamlit
+- Plotly
+
+Dataset:
+Online Retail II
+""")
 
            
