@@ -1,0 +1,17 @@
+venv/
+**pycache**/
+*.pyc
+
+.ipynb_checkpoints/
+
+.streamlit/
+
+.DS_Store
+Thumbs.db
+
+.env
+
+.idea/
+.vscode/
+
+*.log
