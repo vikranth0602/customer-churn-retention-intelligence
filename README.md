@@ -1,5 +1,8 @@
 # Customer Churn Prediction & Retention Intelligence System
 
+## Live Demo
+https://customer-churn-retention-intelligence-ihb97uqy4fh7ebgunb8vnm.streamlit.app/
+
 ## Overview
 
 This project predicts customer churn using transactional retail data and machine learning.
